@@ -1,2 +1,0 @@
-/*holitas pro
- */
