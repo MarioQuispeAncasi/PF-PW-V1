@@ -1,0 +1,258 @@
+*{
+    margin:0;
+    padding: 0;
+}
+header{
+    width: 100%;
+    max-width: 100%;    
+}
+#inicio{
+    width: 100%;
+    max-width: 100%;
+    background: orangered;
+}
+.in h1{
+    color: white;
+    font-size: 20px;
+    line-height: 1.7;
+    margin-left: 5%;
+}
+.cabe{
+    width: 90%;
+    max-width: 90%;
+    margin: auto;
+    display: flex;
+}
+.cont{
+    display: block;
+    width: 50%;
+    max-width: 50%;
+}
+.titulo h1 a{
+    font-size: 35px;
+    color: orangered;
+    line-height: 1.8;
+    margin-left: 15px;
+}
+.par p{
+    font-size: 17px;
+}
+.login{
+    width: 50%;
+    max-width: 50%;
+    margin-left: 60%;
+    margin-top: 2%;
+}
+.contlog{
+    display: flex;
+}
+.init{
+    margin: 10px;
+}
+.init a{
+    text-decoration: none;
+    background: orangered;
+    padding: 10px;
+    color:white;
+    border: 2px solid black;
+}
+.acount{
+    margin: 10px;
+}
+.acount a{
+    text-decoration: none;
+    background: orangered;
+    padding: 10px;
+    color:white;
+    border: 2px solid black;
+}
+#partidas{
+    width: 100%;
+    max-width: 100%;
+}
+.contpar{
+    display: flex;
+}
+.cubo{
+    width: 50%;
+    max-width: 50%;
+}
+.cubo img{
+    width: 100%;
+    height: auto;
+}
+.bolita{
+    text-align: center;
+}
+.slideshow-container {
+    max-width: 1000px;
+    position: relative;
+    margin: auto;
+}
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    margin-top: -22px;
+    color: white;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+}
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+.prev:hover, .next:hover {
+    background-color: rgba(0,0,0,0.8);
+}
+img{
+    width: 100%;
+}
+.dot {
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+} 
+.active, .dot:hover {
+    background-color: #717171;
+}
+@-webkit-keyframes fade {
+    from {opacity: .4} 
+    to {opacity: 1}
+}
+@keyframes fade {
+    from {opacity: .4} 
+    to {opacity: 1}
+}
+footer{
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+    background: rgb(126, 116, 112);
+}
+.redes{
+    width: 33.3%;
+    max-width: 33.3%;
+    margin-left: 5%;
+    margin-top: 2%;
+}
+i{
+    font-size: 15px;
+    color: orange;
+    padding: 10px;
+}
+.info{
+    display: block;
+    width: 33.3%;
+    max-width: 33.3%;
+}
+.cont1{
+    display: block;
+    width: 100%;
+    max-width: 100%;
+}
+.titulo1 h1{
+    font-size: 35px;
+    color: orangered;
+    line-height: 1.8;
+    text-align: center;
+}
+.par1 p{
+    font-size: 17px;
+    color: white;
+    text-align: center;
+}
+.tyc{
+    border-top: 2px solid white;
+    border-bottom: 2px solid white;
+    margin-top: 25px;
+    margin-bottom: 35px;
+}
+.tyc a{
+    text-decoration: none;
+    color:  white;
+    padding: 15px;
+    margin-left: 8%;
+}
+.cop{
+    width: 33.3%;
+    max-width: 33.3%;
+}
+.cop p{
+    margin-left: 70%;
+    margin-top: 25%;
+    color: orange;
+}
+.container{
+    margin: auto;
+    background-color: white;
+    width: 100%;
+    padding: 30px;
+}
+@media(max-width:1024px){
+    .cabe{
+        width: 100%;
+        max-width: 100%;
+    }
+    .login{
+        width: 46%;
+        margin-left: 0;
+    }
+}
+@media(max-width:768px){
+    .cabe{
+        display: block;
+    }
+    .cont{
+        width: 100%;
+        max-width: 100%;
+        padding: 20px 0px;
+    }
+    .titulo,.par{
+        text-align: center;
+    }
+    .login{
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+        padding: 10px 0px;
+    }
+    .contlog{
+        display: block;
+    }
+    .init,.acount{
+        text-align: center;
+        padding: 15px;
+    }
+    footer{
+        display: block;
+    }
+    .redes{
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+    }
+    .info{
+        width: 100%;
+        max-width: 100%;
+    }
+    .cop{
+        width: 100%;
+        max-width: 100%;
+    }
+    .cop p{
+        margin: 0;
+        text-align:center;
+    }
+}
+@media only screen and (max-width: 300px) {
+    .prev, .next,.text {font-size: 11px}
+  }
