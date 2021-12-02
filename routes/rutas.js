@@ -97,3 +97,88 @@ rutas.route("/actualizar-juego").post(async (req, res, next) => {
   );
   res.redirect("/juegos");
 });
+
+rutas.route("/partidas-admin").get(async (req, res, next) => {
+  let matches = await queryMatches().catch((error) => {
+    console.log("Ocurrio un error en el query", error);
+  });
+  let games = await queryGames().catch((error) => {
+    console.log("Error en querygames ", error);
+  });
+  res.render("tableMatchesAdmin", {
+    matches: matches,
+    games: games,
+    layout: "../layouts/matchesAdmin",
+  });
+});
+
+rutas.route("/agregar-partida").post(async (req, res, next) => {
+  await insertMatch({
+    juego: req.body.juegos,
+    fecha: req.body.fecha,
+    horaInicio: req.body.horaInicio,
+    duracion: req.body.duracion,
+    estado: req.body.estados,
+    equipoA: req.body.equipoA,
+    equipoB: req.body.equipoB,
+    factorGanadorA: req.body.factorGanadorA,
+    factorGanadorB: req.body.factorGanadorB,
+    resultado: req.body.resultados,
+  }).catch((error) => {
+    console.log("Ocurrio un error en el insert", error);
+  });
+  res.redirect("/partidas-admin");
+});
+
+rutas.route("/eliminar-partida").post(async (req, res, next) => {
+  await deleteMatch(req.body.id).catch((error) => {
+    console.log("Ocurrio un error en el delete", error);
+  });
+  res.redirect("/partidas-admin");
+});
+
+rutas.route("/editar-partida").post(async (req, res, next) => {
+  let games = await queryGames().catch((error) => {
+    console.log("Error en querygames ", error);
+  });
+  let matches = await queryMatches().catch((error) => {
+    console.log("Error en queryGames ", error);
+  });
+
+  res.render("editMatchForm", {
+    matches: matches.filter((match) => match.id == req.body.id),
+    games: games,
+    layout: "../layouts/edit",
+  });
+});
+
+rutas.route("/actualizar-partida").post(async (req, res, next) => {
+  await updateMatch(
+    req.body.id,
+    req.body.juegos,
+    req.body.horaInicio,
+    req.body.duracion,
+    req.body.estados,
+    req.body.equipoA,
+    req.body.equipoB,
+    req.body.factorGanadorA,
+    req.body.factorGanadorB,
+    req.body.resultados
+  ).catch((error) => {
+    console.log("error en actualizar...");
+  });
+  res.redirect("/partidas-admin");
+});
+
+rutas.route("/clientes").get(async (req, res, next) => {
+  let users;
+  users = await query().catch((error) => {
+    console.log("Ocurrio un error en el query", error);
+  });
+  res.render("tableUsers", {
+    users: users,
+    layout: "../layouts/clients",
+  });
+});
+
+module.exports = rutas;
