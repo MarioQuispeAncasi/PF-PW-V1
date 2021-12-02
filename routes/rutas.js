@@ -1,3 +1,68 @@
+//registros
+rutas.route("/registro").get(async (req, res, next) => {
+    res.render("registerForm", {
+      layout: "../layouts/register",
+    });
+  });
+
+rutas.route("/registro2").post(async (req, res, next) => {
+    req.session.tempUser = {};
+    req.session.tempUser = { nombre: req.body.name, apellido: req.body.lastname };
+  
+    res.render("registerForm2", {
+      layout: "../layouts/register",
+    });
+  });
+  
+
+rutas.route("/registro3").post(async (req, res, next) => {
+    req.session.tempUser = { ...req.session.tempUser, dni: req.body.dni };
+    res.render("registerForm3", {
+      layout: "../layouts/register",
+    });
+  });
+  
+rutas.route("/registro4").post(async (req, res, next) => {
+    req.session.tempUser = {
+      ...req.session.tempUser,
+      correo: req.body.email,
+      clave: req.body.password,
+      telefono: req.body.phone,
+    };
+    res.render("registerForm4", {
+      layout: "../layouts/register",
+    });
+  });
+  
+rutas.route("/registro5").post(async (req, res, next) => {
+    req.session.tempUser = {
+      ...req.session.tempUser,
+      departamento: req.body.departamentos,
+      provincia: req.body.provincias,
+      distrito: req.body.distritos,
+    };
+    res.render("registerForm5", {
+      layout: "../layouts/register",
+    });
+  });
+  
+rutas.route("/registrar").post(async (req, res, next) => {
+    req.session.tempUser = {
+      ...req.session.tempUser,
+      pep: req.body.PEP ? true : false,
+      admin: false,
+    };
+  
+    await insert(req.session.tempUser)
+      .then(async () => {
+        req.session.user = req.session.tempUser;
+        req.session.tempUser = {};
+        res.redirect("/cliente");
+      })
+      .catch((error) => {
+        console.log("Ocurrio un error en el insert", error);
+      });
+  });
 rutas.route("/categorias").get(async (req, res, next) => {
     let categories = await queryCategories().catch((error) => {
       console.log("Ocurrio un error en el query", error);
@@ -8,21 +73,21 @@ rutas.route("/categorias").get(async (req, res, next) => {
     });
   });
   
-  rutas.route("/agregar-categoria").post(async (req, res, next) => {
+rutas.route("/agregar-categoria").post(async (req, res, next) => {
     await insertCat({ nombre: req.body.nombre }).catch((error) => {
       console.log("Ocurrio un error en el insert", error);
     });
     res.redirect("/categorias");
   });
   
-  rutas.route("/eliminar-categoria").post(async (req, res, next) => {
+rutas.route("/eliminar-categoria").post(async (req, res, next) => {
     await deleteCategory(req.body.id).catch((error) => {
       console.log("Ocurrio un error en el delete", error);
     });
     res.redirect("/categorias");
   });
   
-  rutas.route("/editar-categoria").post(async (req, res, next) => {
+rutas.route("/editar-categoria").post(async (req, res, next) => {
     // Debo ir a la BD a obtener la informacion
     // y mostrarla en un form
     await queryCategories(req.body.id)
