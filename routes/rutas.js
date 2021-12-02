@@ -193,6 +193,18 @@ rutas.route("/clientes").get(async (req, res, next) => {
   });
 });
 
+rutas.route("/partidas").get(async (req, res, next) => {
+  await queryMatches()
+    .then((listado) => {
+      res.render("tableMatches", {
+        matches: listado,
+        layout: "../layouts/matches",
+      });
+    })
+    .catch((error) => {
+      console.log("Ocurrio un error en el query", error);
+    });
+});
 module.exports = rutas;
 
 
