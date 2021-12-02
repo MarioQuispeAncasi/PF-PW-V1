@@ -1,0 +1,220 @@
+body {
+    background: rgb(233, 110, 10);
+    font-family: 'Open Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+header{
+  width: 100%;
+  max-width: 100%;   
+  background: white;
+}
+#inicio{
+    width: 100%;
+    max-width: 100%;
+    background: orangered;
+}
+.in h1{
+    color: white;
+    font-size: 20px;
+    line-height: 1.7;
+    margin-left: 5%;
+}
+.cabe{
+    width: 90%;
+    max-width: 90%;
+    margin: auto;
+    display: flex;
+}
+.cont{
+    display: block;
+    width: 50%;
+    max-width: 50%;
+}
+.titulo h1 a{
+    font-size: 35px;
+    color: orangered;
+    line-height: 1.8;
+    margin-left: 15px;
+}
+.par p{
+    font-size: 17px;
+}
+.login{
+    width: 50%;
+    max-width: 50%;
+    margin-left: 60%;
+    margin-top: 2%;
+}
+.contlog{
+    display: flex;
+}
+.init{
+    margin: 10px;
+}
+.init a{
+    text-decoration: none;
+    background: orangered;
+    padding: 10px;
+    color:white;
+    border: 2px solid black;
+}
+.acount{
+    margin: 10px;
+}
+.acount a{
+    text-decoration: none;
+    background: orangered;
+    padding: 10px;
+    color:white;
+    border: 2px solid black;
+}
+.cuenta {
+  width: 35%;
+  margin:16px auto;
+  font-size: 16px;
+}
+.cuenta-header,
+.cuenta p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.forma-triangulo {
+  width: 0;
+  margin-right: auto;
+  margin-left: auto;
+  border: 12px solid transparent;
+  border-bottom-color: #17c;
+}
+.cuenta-header {
+  background: #17c;
+  padding: 20px;
+  font-size: 16px;
+  text-align: center;
+  text-transform: uppercase;
+  color: #fff;
+}
+.cuenta-contenedor {
+  background: #ebebeb;
+  padding: 12px;
+}
+.cuenta p {
+  padding: 12px;
+}
+.cuenta input {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  border: 1px solid;
+  padding: 16px;
+  font-size: 16px;
+}
+.cuenta input[type="email"],
+.cuenta input[type="password"] {
+  background: #fff;
+  border-color: #bbb;
+  color: #555;
+}
+.cuenta input[type="email"]:focus,
+.cuenta input[type="password"]:focus {
+  border-color: #888;
+}
+.cuenta input[type="submit"] {
+  background: #28d;
+  border-color: transparent;
+  color: #fff;
+  cursor: pointer;
+}
+.cuenta input[type="submit"]:hover {
+  background: #17c;
+}
+.cuenta input[type="submit"]:focus {
+  border-color: #05a;
+}
+i{
+  font-size: 15px;
+  color: orange;
+  padding: 10px;
+}
+.info{
+  display: block;
+  width: 33.3%;
+  max-width: 33.3%;
+  margin: auto;
+}
+.cont1{
+  display: block;
+  width: 100%;
+  max-width: 100%;
+}
+.titulo1 h1{
+  font-size: 35px;
+  color: orangered;
+  line-height: 1.8;
+  text-align: center;
+}
+.par1 p{
+  font-size: 17px;
+  color: white;
+  text-align: center;
+}
+.tyc{
+  border-top: 2px solid white;
+  border-bottom: 2px solid white;
+}
+.tyc a{
+  text-decoration: none;
+  color:  white;
+  padding: 15px;
+  margin-left: 8%;
+}
+.cop{
+  width: 33.3%;
+  max-width: 33.3%;
+}
+.cop p{
+  margin-left: 70%;
+  margin-top: 25%;
+  color: orange;
+}
+.container{
+  margin: auto;
+  background-color: white;
+  width: 100%;
+}
+@media(max-width:1024px){
+  .cabe{
+      width: 100%;
+      max-width: 100%;
+  }
+  .login{
+      width: 46%;
+      margin-left: 0;
+  }
+}
+@media(max-width:768px){
+  .cabe{
+      display: block;
+  }
+  .cont{
+      width: 100%;
+      max-width: 100%;
+      padding: 20px 0px;
+  }
+  .titulo,.par{
+      text-align: center;
+  }
+  .login{
+      width: 100%;
+      max-width: 100%;
+      margin: 0;
+      padding: 10px 0px;
+  }
+  .contlog{
+      display: block;
+  }
+  .init,.acount{
+      text-align: center;
+      padding: 15px;
+  }
+}
