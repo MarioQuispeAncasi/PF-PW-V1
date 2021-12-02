@@ -1,3 +1,42 @@
+const express = require("express");
+const bodyParser = require("body-parser");
+const sequelize = require("sequelize");
+const models = require("../models");
+
+// Modulos de acceso a BD
+const query = require("../persistencia/selectall");
+const insert = require("../persistencia/insert");
+
+const queryMatches = require("../persistencia/selectallMatches");
+
+const insertBet = require("../persistencia/insertBet");
+const updateBet = require("../persistencia/updateBet");
+const deleteBet = require("../persistencia/deleteBet");
+const queryBets = require("../persistencia/selectallBets");
+
+const insertCat = require("../persistencia/insertCategory");
+const updateCategory = require("../persistencia/updateCategory");
+const deleteCategory = require("../persistencia/deleteCategory");
+const queryCategories = require("../persistencia/selectallCategories");
+
+const insertGame = require("../persistencia/insertGame");
+const updateGame = require("../persistencia/updateGame");
+const deleteGame = require("../persistencia/deleteGame");
+const queryGames = require("../persistencia/selectallGames");
+
+const insertMatch = require("../persistencia/insertMatch");
+const updateMatch = require("../persistencia/updateMatch");
+const deleteMatch = require("../persistencia/deleteMatch");
+const queryMatch = require("../persistencia/selectallMatches");
+
+const rutas = express.Router();
+
+rutas.use(express.urlencoded({ extended: true }));
+rutas.use(express.json());
+
+rutas.route("/").get((req, res, next) => {
+  res.render("slider", { layout: "../layouts/home" });
+});
 rutas.route("/categorias").get(async (req, res, next) => {
     let categories = await queryCategories().catch((error) => {
       console.log("Ocurrio un error en el query", error);
@@ -7,7 +46,17 @@ rutas.route("/categorias").get(async (req, res, next) => {
       layout: "../layouts/categories",
     });
   });
-  
+  rutas.route("/reglas").get((req, res, next) => {
+  res.render("rules", { layout: "../layouts/info" });
+});
+
+rutas.route("/TC").get((req, res, next) => {
+  res.render("TC", { layout: "../layouts/info" });
+});
+
+rutas.route("/nosotros").get((req, res, next) => {
+  res.render("team", { layout: "../layouts/info" });
+});
   rutas.route("/agregar-categoria").post(async (req, res, next) => {
     await insertCat({ nombre: req.body.nombre }).catch((error) => {
       console.log("Ocurrio un error en el insert", error);
