@@ -1,0 +1,74 @@
+<% matches.forEach( function(s) { %>
+<form id="myForm" action="actualizar-juego" method="post">
+  <select name="juegos">
+    <% games.forEach( function(cat) { %>
+    <option><%= cat.nombre %></option>
+    <% }) %>
+  </select>
+  <div>
+    <label class="form-label">Nombre</label>
+    <input
+      id="form-id"
+      class="form-control"
+      type="hidden"
+      name="id"
+      value="<%= s.id %>"
+    />
+    <input
+      id="form-nombre"
+      class="form-control"
+      type="text"
+      name="nombre"
+      value="<%= s.horaInicio %>"
+    />
+    <input
+      id="form-nombre"
+      class="form-control"
+      type="text"
+      name="nombre"
+      value="<%= s.duracion %>"
+    />
+    <select name="estados">
+      <option>pendiente</option>
+      <option>iniciado</option>
+      <option>finalizado</option>
+    </select>
+    <input
+      id="form-nombre"
+      class="form-control"
+      type="text"
+      name="nombre"
+      value="<%= s.equipoA %>"
+    />
+    <input
+      id="form-nombre"
+      class="form-control"
+      type="text"
+      name="nombre"
+      value="<%= s.equipoB %>"
+    />
+    <input
+      id="form-nombre"
+      class="form-control"
+      type="text"
+      name="nombre"
+      value="<%= s.factorGanadorA %>"
+    />
+    <input
+      id="form-nombre"
+      class="form-control"
+      type="text"
+      name="nombre"
+      value="<%= s.factorGanadorB %>"
+    />
+    <select name="resultados">
+      <option><%= s.equipoA %></option>
+      <option><%= s.equipoB %></option>
+      <option>empate</option>
+    </select>
+  </div>
+  <button id="but-actualizar" type="submit" class="btn btn-primary mt-2">
+    Actualizar
+  </button>
+</form>
+<% }) %>
