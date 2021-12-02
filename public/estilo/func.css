@@ -1,0 +1,194 @@
+body {
+    font-family: "Lato", sans-serif;
+  }
+  header{
+    width: 100%;
+    max-width: 100%;    
+}
+#inicio{
+    width: 100%;
+    max-width: 100%;
+    background: orangered;
+}
+.in h1{
+    color: white;
+    font-size: 20px;
+    line-height: 1.7;
+    margin-left: 5%;
+}
+.cabe{
+    width: 90%;
+    max-width: 90%;
+    margin: auto;
+    display: flex;
+}
+.cont{
+    display: block;
+    width: 50%;
+    max-width: 50%;
+}
+.titulo h1 a{
+    font-size: 35px;
+    color: orangered;
+    line-height: 1.8;
+    margin-left: 15px;
+}
+.par p{
+    font-size: 17px;
+}
+.login{
+    width: 50%;
+    max-width: 50%;
+    margin-left: 60%;
+    margin-top: 2%;
+}
+.contlog{
+    display: flex;
+}
+.init{
+    margin: 10px;
+}
+.init a{
+    text-decoration: none;
+    background: orangered;
+    padding: 10px;
+    color:white;
+    border: 2px solid black;
+}
+.acount{
+    margin: 10px;
+}
+.acount a{
+    text-decoration: none;
+    background: orangered;
+    padding: 10px;
+    color:white;
+    border: 2px solid black;
+}
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+span{
+  font-size:30px;
+  cursor:pointer;
+}
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+i{
+  font-size: 15px;
+  color: orange;
+  padding: 10px;
+}
+.info{
+  display: block;
+  width: 33.3%;
+  max-width: 33.3%;
+}
+.cont1{
+  display: block;
+  width: 100%;
+  max-width: 100%;
+}
+.titulo1 h1{
+  font-size: 35px;
+  color: orangered;
+  line-height: 1.8;
+  text-align: center;
+}
+.par1 p{
+  font-size: 17px;
+  color: white;
+  text-align: center;
+}
+.tyc{
+  border-top: 2px solid white;
+  border-bottom: 2px solid white;
+  margin-top: 25px;
+  margin-bottom: 35px;
+}
+.tyc a{
+  text-decoration: none;
+  color:  white;
+  padding: 15px;
+  margin-left: 8%;
+}
+.cop{
+  width: 33.3%;
+  max-width: 33.3%;
+}
+.cop p{
+  margin-left: 70%;
+  margin-top: 25%;
+  color: orange;
+}
+.container{
+  margin: auto;
+  background-color: white;
+  width: 100%;
+  padding: 30px;
+}
+@media(max-width:1024px){
+  .cabe{
+      width: 100%;
+      max-width: 100%;
+  }
+  .login{
+      width: 46%;
+      margin-left: 0;
+  }
+}
+@media(max-width:768px){
+  .cabe{
+      display: block;
+  }
+  .cont{
+      width: 100%;
+      max-width: 100%;
+      padding: 20px 0px;
+  }
+  .titulo,.par{
+      text-align: center;
+  }
+  .login{
+      width: 100%;
+      max-width: 100%;
+      margin: 0;
+      padding: 10px 0px;
+  }
+  .contlog{
+      display: block;
+  }
+  .init,.acount{
+      text-align: center;
+      padding: 15px;
+  }
+}
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
