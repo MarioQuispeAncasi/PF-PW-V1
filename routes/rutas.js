@@ -37,15 +37,16 @@ rutas.use(express.json());
 rutas.route("/").get((req, res, next) => {
   res.render("slider", { layout: "../layouts/home" });
 });
-rutas.route("/categorias").get(async (req, res, next) => {
-    let categories = await queryCategories().catch((error) => {
-      console.log("Ocurrio un error en el query", error);
-    });
-    res.render("tableCategories", {
-      categories: categories,
-      layout: "../layouts/categories",
-    });
-  });
+
+rutas.route("/login").get((req, res, next) => {
+  res.render("loginForm", { layout: "../layouts/login" });
+});
+
+rutas.route("/logout").get((req, res, next) => {
+  req.session.user = null;
+  res.render("slider", { layout: "../layouts/home" });
+});
+
   rutas.route("/reglas").get((req, res, next) => {
   res.render("rules", { layout: "../layouts/info" });
 });
@@ -57,6 +58,173 @@ rutas.route("/TC").get((req, res, next) => {
 rutas.route("/nosotros").get((req, res, next) => {
   res.render("team", { layout: "../layouts/info" });
 });
+
+rutas.route("/verificacion").post(async (req, res, next) => {
+  await query()
+    .then((listado) => {
+      let login = false;
+      let usuarios = listado.filter(
+        (element) => element.correo === req.body.email
+      );
+      login = usuarios.length ? usuarios[0].clave === req.body.password : false;
+      if (login) {
+        req.session.user = usuarios[0];
+        res.redirect("/cliente");
+      } else res.render("loginForm", { layout: "../layouts/login" });
+    })
+    .catch((error) => {
+      console.log("Ocurrio un error en el query", error);
+    });
+});
+
+rutas.route("/cliente").get(async (req, res, next) => {
+  if (req.session.user.admin)
+    res.render("navAdmin", {
+      user: req.session.user,
+      layout: "../layouts/client",
+    });
+  else
+    res.render("nav", {
+      user: req.session.user,
+      layout: "../layouts/client",
+    });
+});
+
+rutas.route("/registro2").post(async (req, res, next) => {
+  req.session.tempUser = {};
+  req.session.tempUser = { nombre: req.body.name, apellido: req.body.lastname };
+
+  res.render("registerForm2", {
+    layout: "../layouts/register",
+  });
+});
+
+rutas.route("/registro3").post(async (req, res, next) => {
+  req.session.tempUser = { ...req.session.tempUser, dni: req.body.dni };
+  res.render("registerForm3", {
+    layout: "../layouts/register",
+  });
+});
+
+rutas.route("/registro4").post(async (req, res, next) => {
+  req.session.tempUser = {
+    ...req.session.tempUser,
+    correo: req.body.email,
+    clave: req.body.password,
+    telefono: req.body.phone,
+  };
+  res.render("registerForm4", {
+    layout: "../layouts/register",
+  });
+});
+
+rutas.route("/registro5").post(async (req, res, next) => {
+  req.session.tempUser = {
+    ...req.session.tempUser,
+    departamento: req.body.departamentos,
+    provincia: req.body.provincias,
+    distrito: req.body.distritos,
+  };
+  res.render("registerForm5", {
+    layout: "../layouts/register",
+  });
+});
+
+rutas.route("/registrar").post(async (req, res, next) => {
+  req.session.tempUser = {
+    ...req.session.tempUser,
+    pep: req.body.PEP ? true : false,
+    admin: false,
+  };   
+  
+    await insert(req.session.tempUser)
+    .then(async () => {
+      req.session.user = req.session.tempUser;
+      req.session.tempUser = {};
+      res.redirect("/cliente");
+    })
+    .catch((error) => {
+      console.log("Ocurrio un error en el insert", error);
+    });
+});
+
+rutas.route("/partidas").get(async (req, res, next) => {
+  await queryMatches()
+    .then((listado) => {
+      res.render("tableMatches", {
+        matches: listado,
+        layout: "../layouts/matches",
+      });
+    })
+    .catch((error) => {
+      console.log("Ocurrio un error en el query", error);
+    });
+});
+
+rutas.route("/apostar").post(async (req, res, next) => {
+  let bets;
+  await queryBets()
+    .then((listado) => {
+      bets = listado
+        .filter((bet) => bet.idUsuario == req.session.user.id)
+        .filter((bet) => bet.idPartida == req.body.id);
+    })
+    .catch((error) => {
+      console.log("Ocurrio un error en el query", error);
+    });
+  if (bets.length) {
+    await deleteBet(bets[0].id).catch((error) => {
+      console.log("Ocurrio un error en el delete", error);
+    });
+  } else {
+    await insertBet({
+      idPartida: req.body.id,
+      idUsuario: req.session.user.id,
+      equipo: req.body.team,
+      factor: req.body.betFactor,
+      monto: 0,
+    }).catch((error) => {
+      console.log("Ocurrio un error en el insert", error);
+    });
+  }
+
+  res.redirect("/partidas");
+});
+
+rutas.route("/apuestas").get(async (req, res, next) => {
+  let matches;
+  let bets;
+  matches = await queryMatches().catch((error) => {
+    console.log("Ocurrio un error en el query", error);
+  });
+  bets = await queryBets().catch((error) => {
+    console.log("Ocurrio un error en el query", error);
+  });
+  res.render("tableBets", {
+    matches: matches,
+    bets: bets.filter((bet) => bet.idUsuario == req.session.user.id),
+    layout: "../layouts/bets",
+  });
+});
+
+rutas.route("/cambiarMonto").post(async (req, res, next) => {
+  await updateBet(req.body.id, req.body.amount).catch((error) => {
+    console.log("error en actualiza ...");
+  });
+
+  res.redirect("/apuestas");
+});
+
+rutas.route("/categorias").get(async (req, res, next) => {
+    let categories = await queryCategories().catch((error) => {
+      console.log("Ocurrio un error en el query", error);
+    });
+    res.render("tableCategories", {
+      categories: categories,
+      layout: "../layouts/categories",
+    });
+  });
+
   rutas.route("/agregar-categoria").post(async (req, res, next) => {
     await insertCat({ nombre: req.body.nombre }).catch((error) => {
       console.log("Ocurrio un error en el insert", error);
@@ -92,6 +260,7 @@ rutas.route("/nosotros").get((req, res, next) => {
     });
     res.redirect("/categorias");
   });
+
   rutas.route("/juegos").get(async (req, res, next) => {
   let games = await queryGames().catch((error) => {
     console.log("Ocurrio un error en el query", error);
@@ -229,88 +398,6 @@ rutas.route("/clientes").get(async (req, res, next) => {
     layout: "../layouts/clients",
   });
 });
-
-
-rutas.route("/clientes").get(async (req, res, next) => {
-  let users;
-  users = await query().catch((error) => {
-    console.log("Ocurrio un error en el query", error);
-  });
-  res.render("tableUsers", {
-    users: users,
-    layout: "../layouts/clients",
-  });
-});
-
-rutas.route("/partidas").get(async (req, res, next) => {
-  await queryMatches()
-    .then((listado) => {
-      res.render("tableMatches", {
-        matches: listado,
-        layout: "../layouts/matches",
-      });
-    })
-    .catch((error) => {
-      console.log("Ocurrio un error en el query", error);
-    });
-});
-
-
-
-rutas.route("/apostar").post(async (req, res, next) => {
-  let bets;
-  await queryBets()
-    .then((listado) => {
-      bets = listado
-        .filter((bet) => bet.idUsuario == req.session.user.id)
-        .filter((bet) => bet.idPartida == req.body.id);
-    })
-    .catch((error) => {
-      console.log("Ocurrio un error en el query", error);
-    });
-  if (bets.length) {
-    await deleteBet(bets[0].id).catch((error) => {
-      console.log("Ocurrio un error en el delete", error);
-    });
-  } else {
-    await insertBet({
-      idPartida: req.body.id,
-      idUsuario: req.session.user.id,
-      equipo: req.body.team,
-      factor: req.body.betFactor,
-      monto: 0,
-    }).catch((error) => {
-      console.log("Ocurrio un error en el insert", error);
-    });
-  }
-
-  res.redirect("/partidas");
-});
-
-rutas.route("/apuestas").get(async (req, res, next) => {
-  let matches;
-  let bets;
-  matches = await queryMatches().catch((error) => {
-    console.log("Ocurrio un error en el query", error);
-  });
-  bets = await queryBets().catch((error) => {
-    console.log("Ocurrio un error en el query", error);
-  });
-  res.render("tableBets", {
-    matches: matches,
-    bets: bets.filter((bet) => bet.idUsuario == req.session.user.id),
-    layout: "../layouts/bets",
-  });
-});
-
-rutas.route("/cambiarMonto").post(async (req, res, next) => {
-  await updateBet(req.body.id, req.body.amount).catch((error) => {
-    console.log("error en actualiza ...");
-  });
-
-  res.redirect("/apuestas");
-});
-
 
 module.exports = rutas;
 
