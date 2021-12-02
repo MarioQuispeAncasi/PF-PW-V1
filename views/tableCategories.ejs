@@ -1,0 +1,17 @@
+<% categories.forEach(  function(s) { %>
+    <tr>
+        <td> <%= s.nombre %></td>
+        <td>
+            <form action="eliminar-categoria" method="post">
+                <input type="hidden" name="id" value=<%= s.id %> >
+                <button id="but-eliminar" type="submit" class="btn btn-danger btn-sm"> Eliminar </button>
+            </form>    
+        </td>
+        <td>
+            <form action="editar-categoria" method="post">
+                <input type="hidden" name="id" value=<%= s.id %> >
+                <button id="but-editar" type="submit" class="btn btn-warning btn-sm"> Editar </button>
+            </form>    
+        </td>            
+    </tr>
+<% }) %>

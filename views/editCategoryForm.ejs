@@ -1,0 +1,25 @@
+<% category.forEach( function(s) { %>
+    <form id="myForm" action="actualizar-categoria" method="post">
+      <div>
+        <label class="form-label">Nombre</label>
+        <input
+          id="form-id"
+          class="form-control"
+          type="hidden"
+          name="id"
+          value="<%= s.id %>"
+        />
+        <input
+          id="form-nombre"
+          class="form-control"
+          type="text"
+          name="nombre"
+          value="<%= s.nombre %>"
+        />
+      </div>
+      <button id="but-actualizar" type="submit" class="btn btn-primary mt-2">
+        Actualizar
+      </button>
+    </form>
+    <% }) %>
+    
