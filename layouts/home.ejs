@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../estilo/index.css" />
+    <title>PAGINA DE INICIO</title>
+  </head>
+  <body>
+    <%- include('../partials/header.ejs') %>
+    <section id="inicio">
+      <div class="in">
+        <h1>INICIO</h1>
+      </div>
+    </section>
+    <%- body %>
+    <section id="partidas">
+      <div class="contpar">
+        <div class="cubo">
+          <img src="../Imagenes/imagen1.png" alt="" />
+        </div>
+        <div class="cubo">
+          <img src="../Imagenes/imagen2.jpg" alt="" />
+        </div>
+      </div>
+      <div class="contpar">
+        <div class="cubo">
+          <img src="../Imagenes/imagen3.jpg" alt="" />
+        </div>
+        <div class="cubo">
+          <img src="../Imagenes/imagen4.jpg" alt="" />
+        </div>
+      </div>
+    </section>
+    <%- include('../partials/footer.ejs') %>
+  </body>
+  <script src="../funciones/slider.js"></script>
+</html>
