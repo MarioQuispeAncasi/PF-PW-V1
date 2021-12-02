@@ -1,0 +1,44 @@
+<% matches.forEach( function(s) { %>
+<tr>
+  <td><%= s.juego %></td>
+  <td><%= s.fecha %></td>
+  <td><%= s.horaInicio %></td>
+  <td><%= s.duracion %></td>
+  <td><%= s.estado %></td>
+  <td><%= s.equipoA %></td>
+  <td><%= s.equipoB %></td>
+  <td style="cursor: pointer">
+    <form id="form1" action="apostar" method="post">
+      <button type="submit">
+        <input type="hidden" name="id" value=<%= s.id %> >
+        <input type="hidden" name="team" value="equipoA" />
+        <input type="hidden" name="betFactor" value=<%= s.factorGanadorA %> />
+        <%= s.factorGanadorA %>
+      </button>
+    </form>
+  </td>
+  <td style="cursor: pointer">
+    <form id="form2" action="apostar" method="post">
+      <button type="submit">
+        <input type="hidden" name="id" value=<%= s.id %> >
+        <input type="hidden" name="team" value="equipoB" />
+        <input type="hidden" name="betFactor" value=<%= s.factorGanadorB %> />
+        <%= s.factorGanadorB %>
+      </button>
+    </form>
+  </td>
+  <td><%= s.resultado %></td>
+</tr>
+<% }) %>
+
+<style>
+button, input[type="submit"], input[type="reset"] {
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+}
+</style>
