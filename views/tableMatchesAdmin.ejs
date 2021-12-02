@@ -1,0 +1,30 @@
+<% matches.forEach( function(s) { %>
+<tr style="width: 40%; overflow-x: scroll;">
+  <td><%= s.juego %></td>
+  <td><%= s.fecha %></td>
+  <td><%= s.horaInicio %></td>
+  <td><%= s.duracion %></td>
+  <td><%= s.estado %></td>
+  <td><%= s.equipoA %></td>
+  <td><%= s.equipoB %></td>
+  <td><%= s.factorGanadorA %></td>
+  <td><%= s.factorGanadorB %></td>
+  <td><%= s.resultado %></td>
+  <td>
+    <form action="eliminar-partida" method="post">
+      <input type="hidden" name="id" value=<%= s.id %> >
+      <button id="but-eliminar" type="submit" class="btn btn-danger btn-sm">
+        Eliminar
+      </button>
+    </form>
+  </td>
+  <td>
+    <form action="editar-partida" method="post">
+      <input type="hidden" name="id" value=<%= s.id %> >
+      <button id="but-editar" type="submit" class="btn btn-warning btn-sm">
+        Editar
+      </button>
+    </form>
+  </td>
+</tr>
+<% }) %>
