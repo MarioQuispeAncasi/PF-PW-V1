@@ -205,6 +205,64 @@ rutas.route("/partidas").get(async (req, res, next) => {
       console.log("Ocurrio un error en el query", error);
     });
 });
+
+
+
+rutas.route("/apostar").post(async (req, res, next) => {
+  let bets;
+  await queryBets()
+    .then((listado) => {
+      bets = listado
+        .filter((bet) => bet.idUsuario == req.session.user.id)
+        .filter((bet) => bet.idPartida == req.body.id);
+    })
+    .catch((error) => {
+      console.log("Ocurrio un error en el query", error);
+    });
+  if (bets.length) {
+    await deleteBet(bets[0].id).catch((error) => {
+      console.log("Ocurrio un error en el delete", error);
+    });
+  } else {
+    await insertBet({
+      idPartida: req.body.id,
+      idUsuario: req.session.user.id,
+      equipo: req.body.team,
+      factor: req.body.betFactor,
+      monto: 0,
+    }).catch((error) => {
+      console.log("Ocurrio un error en el insert", error);
+    });
+  }
+
+  res.redirect("/partidas");
+});
+
+rutas.route("/apuestas").get(async (req, res, next) => {
+  let matches;
+  let bets;
+  matches = await queryMatches().catch((error) => {
+    console.log("Ocurrio un error en el query", error);
+  });
+  bets = await queryBets().catch((error) => {
+    console.log("Ocurrio un error en el query", error);
+  });
+  res.render("tableBets", {
+    matches: matches,
+    bets: bets.filter((bet) => bet.idUsuario == req.session.user.id),
+    layout: "../layouts/bets",
+  });
+});
+
+rutas.route("/cambiarMonto").post(async (req, res, next) => {
+  await updateBet(req.body.id, req.body.amount).catch((error) => {
+    console.log("error en actualiza ...");
+  });
+
+  res.redirect("/apuestas");
+});
+
+
 module.exports = rutas;
 
 
