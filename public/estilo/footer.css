@@ -1,0 +1,23 @@
+footer {
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  background: rgb(126, 116, 112);
+}
+.redes {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+}
+.info {
+  width: 100%;
+  max-width: 100%;
+}
+.cop {
+  width: 100%;
+  max-width: 100%;
+}
+.cop p {
+  margin: 0;
+  text-align: center;
+}
