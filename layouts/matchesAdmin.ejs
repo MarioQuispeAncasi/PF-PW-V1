@@ -1,0 +1,139 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../estilo/estilo.css" />
+  </head>
+  <body
+    style="height: 100vh; display: flex; flex-flow: column; overflow: hidden"
+  >
+    <%- include('../partials/header.ejs') %> <%-
+    include('../views/navAdmin.ejs') %>
+    <div class="row">
+      <div class="col-md-4">
+        <form id="myForm" action="agregar-partida" method="post" style="height: 35em; overflow-y: scroll;">
+          <div>
+            <label class="form-label">Juego</label>
+            <select name="juegos">
+              <% games.forEach( function(cat) { %>
+              <option><%= cat.nombre %></option>
+              <% }) %>
+            </select>
+          </div>
+          <div>
+            <label class="form-label">Fecha</label>
+            <input
+              id="form-fecha"
+              class="form-control"
+              type="text"
+              name="fecha"
+            />
+          </div>
+
+          <div>
+            <label class="form-label">Hora de inicio</label>
+            <input
+              id="form-horaInicio"
+              class="form-control"
+              type="text"
+              name="horaInicio"
+            />
+          </div>
+          <div>
+            <label class="form-label">Duracion</label>
+            <input
+              id="form-duracion"
+              class="form-control"
+              type="text"
+              name="duracion"
+            />
+          </div>
+          <div>
+            <label class="form-label">Estado</label>
+            <select name="estados">
+              <option>pendiente</option>
+              <option>iniciado</option>
+              <option>finalizado</option>
+            </select>
+          </div>
+          <div>
+            <label class="form-label">Equipo A</label>
+            <input
+              id="form-equipoA"
+              class="form-control"
+              type="text"
+              name="equipoA"
+            />
+          </div>
+          <div>
+            <label class="form-label">Equipo B</label>
+            <input
+              id="form-equipoB"
+              class="form-control"
+              type="text"
+              name="equipoB"
+            />
+          </div>
+          <div>
+            <label class="form-label">Factor ganador A</label>
+            <input
+              id="form-factorGanadorA"
+              class="form-control"
+              type="text"
+              name="factorGanadorA"
+            />
+          </div>
+          <div>
+            <label class="form-label">factorGanadorB</label>
+            <input
+              id="form-factorGanadorB"
+              class="form-control"
+              type="text"
+              name="factorGanadorB"
+            />
+          </div>
+
+          <div>
+            <label class="form-label">Resultado</label>
+            <select name="resultados">
+              <option>equipoA</option>
+              <option>equipoB</option>
+              <option>empate</option>
+            </select>
+          </div>
+          <button id="but-agregar" type="submit" class="btn btn-primary mt-2">
+            Grabar
+          </button>
+        </form>
+      </div>
+
+      <div class="col-md-8">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Juego</th>
+              <th>Fecha</th>
+              <th>Hora de inicio</th>
+              <th>Duración</th>
+              <th>Estado</th>
+              <th>Equipo A</th>
+              <th>Equipo B</th>
+              <th>Factor ganador A</th>
+              <th>Factor ganador B</th>
+              <th>Resultado</th>
+            </tr>
+          </thead>
+          <tbody id="datos">
+            <%- body %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <%- include('../partials/footer.ejs') %>
+  </body>
+</html>
