@@ -43,3 +43,57 @@ rutas.route("/categorias").get(async (req, res, next) => {
     });
     res.redirect("/categorias");
   });
+  rutas.route("/juegos").get(async (req, res, next) => {
+  let games = await queryGames().catch((error) => {
+    console.log("Ocurrio un error en el query", error);
+  });
+  let categories = await queryCategories().catch((error) => {
+    console.log("Error en queryCategories ", error);
+  });
+  res.render("tableGames", {
+    games: games,
+    categories: categories,
+    layout: "../layouts/games",
+  });
+});
+
+rutas.route("/agregar-juego").post(async (req, res, next) => {
+  await insertGame({
+    categoria: req.body.categorias,
+    nombre: req.body.nombre,
+  }).catch((error) => {
+    console.log("Ocurrio un error en el insert", error);
+  });
+  res.redirect("/juegos");
+});
+
+rutas.route("/eliminar-juego").post(async (req, res, next) => {
+  await deleteGame(req.body.id).catch((error) => {
+    console.log("Ocurrio un error en el delete", error);
+  });
+  res.redirect("/juegos");
+});
+
+rutas.route("/editar-juego").post(async (req, res, next) => {
+  let categories = await queryCategories().catch((error) => {
+    console.log("Error en queryCategories ", error);
+  });
+  let games = await queryGames().catch((error) => {
+    console.log("Error en queryGames ", error);
+  });
+
+  res.render("editGameForm", {
+    game: games.filter((game) => game.id == req.body.id),
+    categories: categories,
+    layout: "../layouts/edit",
+  });
+});
+
+rutas.route("/actualizar-juego").post(async (req, res, next) => {
+  await updateGame(req.body.id, req.body.nombre, req.body.categorias).catch(
+    (error) => {
+      console.log("error en actualizar...");
+    }
+  );
+  res.redirect("/juegos");
+});

@@ -1,0 +1,23 @@
+<% games.forEach( function(s) { %>
+    <tr>
+      <td><%= s.nombre %></td>
+      <td><%= s.categoria %></td>
+      <td>
+        <form action="eliminar-juego" method="post">
+          <input type="hidden" name="id" value=<%= s.id %> >
+          <button id="but-eliminar" type="submit" class="btn btn-danger btn-sm">
+            Eliminar
+          </button>
+        </form>
+      </td>
+      <td>
+        <form action="editar-juego" method="post">
+          <input type="hidden" name="id" value=<%= s.id %> >
+          <button id="but-editar" type="submit" class="btn btn-warning btn-sm">
+            Editar
+          </button>
+        </form>
+      </td>
+    </tr>
+    <% }) %>
+    

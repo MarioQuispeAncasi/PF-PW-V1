@@ -1,0 +1,29 @@
+<% game.forEach( function(s) { %>
+    <form id="myForm" action="actualizar-juego" method="post">
+      <div>
+        <label class="form-label">Nombre</label>
+        <input
+          id="form-id"
+          class="form-control"
+          type="hidden"
+          name="id"
+          value="<%= s.id %>"
+        />
+        <input
+          id="form-nombre"
+          class="form-control"
+          type="text"
+          name="nombre"
+          value="<%= s.nombre %>"
+        />
+      </div>
+      <select name="categorias">
+        <% categories.forEach( function(cat) { %>
+        <option><%= cat.nombre %></option>
+        <% }) %>
+      </select>
+      <button id="but-actualizar" type="submit" class="btn btn-primary mt-2">
+        Actualizar
+      </button>
+    </form>
+    <% }) %>
