@@ -1,0 +1,78 @@
+<form id="contact" action="registro4" method="post">
+    <h3>Registro</h3>
+    <h4>Paso 3:</h4>
+    <fieldset>
+      <input
+        id="form-email"
+        name="email"
+        placeholder="Correo Electrónico"
+        type="email"
+        tabindex="1"
+        required
+        autofocus
+      />
+    </fieldset>
+    <fieldset>
+      <input
+        id="form-password"
+        name="password"
+        placeholder="Contraseña"
+        type="password"
+        tabindex="2"
+        required
+      />
+    </fieldset>
+    <fieldset>
+      <input
+        id="form-password_confirm"
+        name="password_confirm"
+        placeholder="Repetir contraseña"
+        type="password"
+        tabindex="2"
+        required
+        oninput="check(this)"
+      />
+    </fieldset>
+    <fieldset>
+      <input
+        id="form-phone"
+        name="phone"
+        placeholder="Número telefónico"
+        type="tel"
+        tabindex="2"
+        required
+      />
+    </fieldset>
+    <fieldset>
+      <button
+        type="button"
+        name="submit"
+        id="contact-submit"
+        data-submit="...Sending"
+      >
+        <a href="registro2">Regresar</a>
+      </button>
+    </fieldset>
+    <fieldset>
+      <button
+        name="submit"
+        type="submit"
+        id="contact-submit"
+        data-submit="...Sending"
+      >
+        <a>Siguiente</a>
+      </button>
+    </fieldset>
+  </form>
+  
+  <script language="javascript" type="text/javascript">
+    function check(input) {
+      if (input.value != document.getElementById("form-password").value) {
+        input.setCustomValidity("Las contraseñas deben coincidir.");
+      } else {
+        // input is valid -- reset the error message
+        input.setCustomValidity("");
+      }
+    }
+  </script>
+  
