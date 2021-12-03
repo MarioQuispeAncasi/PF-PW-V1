@@ -90,6 +90,13 @@ rutas.route("/cliente").get(async (req, res, next) => {
     });
 });
 
+// registro
+rutas.route("/registro").get(async (req, res, next) => {
+  res.render("registerForm", {
+    layout: "../layouts/register",
+  });
+});
+
 rutas.route("/registro2").post(async (req, res, next) => {
   req.session.tempUser = {};
   req.session.tempUser = { nombre: req.body.name, apellido: req.body.lastname };
