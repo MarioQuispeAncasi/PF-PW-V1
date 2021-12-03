@@ -10,13 +10,13 @@
     <link rel="stylesheet" href="../estilo/estilo.css" />
   </head>
   <body
-    style="height: 100vh; display: flex; flex-flow: column; overflow: hidden"
+    
   >
     <%- include('../partials/header.ejs') %> <%-
     include('../views/navAdmin.ejs') %>
     <div class="row">
       <div class="col-md-4">
-        <form id="myForm" action="agregar-partida" method="post" style="height: 35em; overflow-y: scroll;">
+        <form id="myForm" action="agregar-partida" method="post" >
           <div>
             <label class="form-label">Juego</label>
             <select name="juegos">
