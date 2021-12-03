@@ -90,7 +90,7 @@ rutas.route("/cliente").get(async (req, res, next) => {
     });
 });
 
-// registro
+// registros
 rutas.route("/registro").get(async (req, res, next) => {
   res.render("registerForm", {
     layout: "../layouts/register",
@@ -98,6 +98,63 @@ rutas.route("/registro").get(async (req, res, next) => {
 });
 
 
+rutas.route("/registro2").post(async (req, res, next) => {
+  req.session.tempUser = {};
+  req.session.tempUser = { nombre: req.body.name, apellido: req.body.lastname };
+
+  res.render("registerForm2", {
+    layout: "../layouts/register",
+  });
+});
+
+rutas.route("/registro3").post(async (req, res, next) => {
+  req.session.tempUser = { ...req.session.tempUser, dni: req.body.dni };
+  res.render("registerForm3", {
+    layout: "../layouts/register",
+  });
+});
+
+rutas.route("/registro4").post(async (req, res, next) => {
+  req.session.tempUser = {
+    ...req.session.tempUser,
+    correo: req.body.email,
+    clave: req.body.password,
+    telefono: req.body.phone,
+  };
+  res.render("registerForm4", {
+    layout: "../layouts/register",
+  });
+});
+
+rutas.route("/registro5").post(async (req, res, next) => {
+  req.session.tempUser = {
+    ...req.session.tempUser,
+    departamento: req.body.departamentos,
+    provincia: req.body.provincias,
+    distrito: req.body.distritos,
+  };
+  res.render("registerForm5", {
+    layout: "../layouts/register",
+  });
+});
+
+rutas.route("/registrar").post(async (req, res, next) => {
+  req.session.tempUser = {
+    ...req.session.tempUser,
+    pep: req.body.PEP ? true : false,
+    admin: false,
+  };   
+  
+    await insert(req.session.tempUser)
+    .then(async () => {
+      req.session.user = req.session.tempUser;
+      req.session.tempUser = {};
+      res.redirect("/cliente");
+    })
+    .catch((error) => {
+      console.log("Ocurrio un error en el insert", error);
+    });
+});
 rutas.route("/partidas").get(async (req, res, next) => {
   await queryMatches()
     .then((listado) => {
