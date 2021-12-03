@@ -106,7 +106,11 @@ rutas.route("/registro2").post(async (req, res, next) => {
     layout: "../layouts/register",
   });
 });
-
+rutas.route("/registro2").get(async (req, res, next) => {
+  res.render("registerForm2", {
+    layout: "../layouts/register",
+  });
+});
 rutas.route("/registro3").post(async (req, res, next) => {
   req.session.tempUser = { ...req.session.tempUser, dni: req.body.dni };
   res.render("registerForm3", {
