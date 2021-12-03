@@ -1,25 +1,26 @@
-<section id="container">
-  <div class="slideshow-container">
-    <div class="mySlides fade">
-      <img src="../imagenes/imagen1.png" />
+<div class="container">
+  <div class="slider">
+    <i class="fa fa-chevron-right fa-2x next-slide" id="next-slide"></i>	
+    <i class="fa fa-chevron-left fa-2x prev-slide" id="prev-slide"></i>
+    
+    <div class="slider-screen" id="slider-screen">
+      <div class="slider-img active" id="slider-img" data-img="1">
+        <img src="../imagenes/imagen1.png" alt="01" />			
+      </div>
+      <div class="slider-img" id="slider-img" data-img="2">
+        <img src="../imagenes/imagen2.jpg" alt="02" />			
+      </div>
+      <div class="slider-img" id="slider-img" data-img="3">
+        <img src="../imagenes/imagen3.jpg" alt="03" />			
+      </div>
     </div>
-
-    <div class="mySlides fade">
-      <img src="../imagenes/imagen2.jpg" />
-    </div>
-
-    <div class="mySlides fade">
-      <img src="../imagenes/imagen3.jpg" />
-    </div>
-
-    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+    <ul class="bullets">
+        <li class="active" data-bull="1"></li>
+        <li data-bull="2"></li>
+        <li data-bull="3"></li>
+      </ul>
   </div>
-  <br />
+</div>
 
-  <div class="bolita">
-    <span class="dot" onclick="currentSlide(1)"></span>
-    <span class="dot" onclick="currentSlide(2)"></span>
-    <span class="dot" onclick="currentSlide(3)"></span>
-  </div>
-</section>
+
+
